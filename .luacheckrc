@@ -1,6 +1,2 @@
-stds = {
-    love = {
-        globals = {"love"}
-    }
-}
-std = "lua51+love"
+new_globals = { '_', 'love' }
+exclude_files = { '**/.*' }

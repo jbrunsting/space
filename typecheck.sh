@@ -12,5 +12,5 @@ while true; do
     old_output="$new_output"    # Update the tracking variable
   fi
 
-  sleep 1
+  sleep 5
 done

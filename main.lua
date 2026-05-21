@@ -4,9 +4,10 @@ function love.draw()
 end
 
 function love.load()
-    Clicks = tonumber((love.filesystem.read("save.txt"))) or 0
+    local clicks = tonumber((love.filesystem.read("save.txt"))) or 0
+    print (clicks)
 end
 
 function love.quit()
-    love.filesystem.write("save.txt", tostring(Clicks))
+    love.filesystem.write("save.txt", tostring(10))
 end

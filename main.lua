@@ -1,6 +1,12 @@
+local physics = require("physics")
+
+function love.update(dt)
+    physics:update(dt)
+end
+
 function love.draw()
-    love.graphics.print("Hello World", 400, 300)
-    love.graphics.print("Hello", 400, 200)
+    local width, height = love.graphics.getDimensions()
+    love.graphics.circle("fill", width / 2 + physics.offset, height / 2, 100)
 end
 
 function love.load()

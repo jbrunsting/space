@@ -40,17 +40,18 @@ function love.load()
     local clicks = tonumber((love.filesystem.read("save.txt"))) or 0
     print (clicks)
 
-    local function createPlanet(x, y, radius)
+    local function createPlanet(x, y, radius, mass)
         return {
             x = x,
             y = y,
-            radius = radius
+            radius = radius,
+            mass = mass
         }
     end
 
-    table.insert(planets, createPlanet(100, 180, 30))
-    table.insert(planets, createPlanet(-300, -200, 40))
-    table.insert(planets, createPlanet(300, -120, 60))
+--    table.insert(planets, createPlanet(100, 180, 30, 0))
+--    table.insert(planets, createPlanet(-300, -200, 40, 0))
+    table.insert(planets, createPlanet(300, -120, 60, 1000))
 end
 
 function love.quit()

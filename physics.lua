@@ -35,15 +35,14 @@ function physics:update(dt, planets)
         end
 
         local acceleration_gravity = p.mass / (distance * distance)
-
         local force_angle = math.atan2(y_dist, x_dist)
 
-        x_acceleration_gravity = x_acceleration_gravity - math.cos(force_angle)
-        y_acceleration_gravity = y_acceleration_gravity - math.sin(force_angle)
+        x_acceleration_gravity = x_acceleration_gravity - math.cos(force_angle) * acceleration_gravity
+        y_acceleration_gravity = y_acceleration_gravity - math.sin(force_angle) * acceleration_gravity
     end
 
-    self.x_velocity = self.x_velocity + x_acceleration_gravity
-    self.y_velocity = self.y_velocity + y_acceleration_gravity
+    self.x_velocity = self.x_velocity + dt * x_acceleration_gravity
+    self.y_velocity = self.y_velocity + dt * y_acceleration_gravity
 
     self.x_offset = self.x_offset + dt * self.x_velocity
     self.y_offset = self.y_offset + dt * self.y_velocity

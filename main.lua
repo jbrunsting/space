@@ -2,15 +2,22 @@ local physics = require("physics")
 
 local planets = {}
 
+local accumulated_dt = 0
+
 function love.update(dt)
-    physics:update(dt, planets)
-    if love.keyboard.isDown("d") or love.keyboard.isDown("right") then
-        physics:updateAngle(-dt)
-    elseif love.keyboard.isDown("a") or love.keyboard.isDown("left") then
-        physics:updateAngle(dt)
-    end
-    if love.keyboard.isDown("w") or love.keyboard.isDown("up") then
-        physics:accelerate(dt)
+    accumulated_dt = accumulated_dt + dt
+    local dt_step = 1 / 6000
+    while accumulated_dt > dt_step do
+        accumulated_dt = accumulated_dt - dt_step
+        physics:update(dt_step, planets)
+        if love.keyboard.isDown("d") or love.keyboard.isDown("right") then
+            physics:updateAngle(-dt_step)
+        elseif love.keyboard.isDown("a") or love.keyboard.isDown("left") then
+            physics:updateAngle(dt_step)
+        end
+        if love.keyboard.isDown("w") or love.keyboard.isDown("up") then
+            physics:accelerate(dt_step)
+        end
     end
 end
 
@@ -51,7 +58,7 @@ function love.load()
 
 --    table.insert(planets, createPlanet(100, 180, 30, 0))
 --    table.insert(planets, createPlanet(-300, -200, 40, 0))
-    table.insert(planets, createPlanet(300, -120, 60, 1000))
+    table.insert(planets, createPlanet(300, -120, 60, 1000000))
 end
 
 function love.quit()
